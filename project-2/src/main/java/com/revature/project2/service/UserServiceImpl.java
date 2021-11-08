@@ -14,6 +14,15 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
+	// Added for testing
+	private static UserService userv = null;
+
+	public static UserService getUserv() {
+		if (userv == null)
+			userv = new UserServiceImpl();
+		return userv;
+	}
+
 	@Override
 	public List<User> findAll() {
 		return userRepository.findAll();

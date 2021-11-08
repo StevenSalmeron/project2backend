@@ -6,18 +6,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "showings")
-@Data 
+@Data
+@AllArgsConstructor // added for testing
 public class Showing {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int showingId;
 	private int theaterId;
 	private String time;
 	private String currentCapacity;
-	
+
 }

@@ -14,6 +14,15 @@ public class ShowingServiceImpl implements ShowingService {
 	@Autowired
 	ShowingRepository showingRepository;
 
+	// Added for testing
+	private static ShowingService serv = null;
+
+	public static ShowingService getServ() {
+		if (serv == null)
+			serv = new ShowingServiceImpl();
+		return serv;
+	}
+
 	@Override
 	public List<Showing> findAll() {
 		return showingRepository.findAll();
