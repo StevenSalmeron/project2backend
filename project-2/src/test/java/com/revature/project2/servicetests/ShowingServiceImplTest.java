@@ -24,8 +24,8 @@ import com.revature.project2.service.ShowingServiceImpl;
 
 public class ShowingServiceImplTest {
 	
-	//6 tests: 1 Error, 1 Failed, 4 Passed
-	//TODO: review failed tests - rewrite if necessary
+	//6 tests: 1 failed, 5 Passed
+	//TODO: review failed test - rewrite if necessary
 	
 	@Mock
 	private ShowingRepository showRepo;
@@ -57,19 +57,23 @@ public class ShowingServiceImplTest {
 		verify(showRepo,times(1)).findAll();
 	}
 	
-	//Test failed - java.lang.ClassCastException - poorly written: review and rewrite
 	
-//	@Test
-//	@Order(2)
-//	public void findByTheaterIdTest() {
-//		Showing temp = new Showing(1, 3, "1:30", "45");
-//		when(showRepo.findByTheaterId(3)).thenReturn((List<Showing>) temp);
-//		
-//		Showing test = (Showing) showService.findByTheaterId(3);
-//		
-//		Assertions.assertEquals("1:30", test.getTime());
-//		Assertions.assertEquals("45", test.getCurrentCapacity());
-//	}
+	@Test
+	@Order(2)
+	public void findByTheaterIdTest() {
+		List<Showing> list = new ArrayList<Showing>();
+		Showing temp = new Showing(1, 3, "1:30", "45");
+		list.add(temp);
+		
+		when(showRepo.findByTheaterId(3)).thenReturn(list);
+		List<Showing> test = showService.findByTheaterId(3);
+		Showing target = test.get(0);
+		
+		Assertions.assertEquals("1:30", target.getTime());
+		Assertions.assertEquals("45", target.getCurrentCapacity());
+		verify(showRepo,times(1)).findByTheaterId(3);
+		
+	}
 	
 	@Test
 	@Order(3)

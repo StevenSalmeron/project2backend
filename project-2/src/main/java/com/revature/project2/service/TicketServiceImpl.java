@@ -14,6 +14,14 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	TicketRepository ticketRepository;
 
+	private static TicketService tServ = null;
+
+	public static TicketService getTServ() {
+		if (tServ == null)
+			tServ = new TicketServiceImpl();
+		return tServ;
+	}
+	
 	@Override
 	public List<Ticket> findAll() {
 		return ticketRepository.findAll();

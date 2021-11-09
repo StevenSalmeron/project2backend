@@ -13,6 +13,14 @@ public class TheaterServiceImpl implements TheaterService {
 
 	@Autowired
 	TheaterRepository theaterRepository;
+	// Added for testing
+	private static TheaterService tServ = null;
+
+	public static TheaterService getTServ() {
+		if (tServ == null)
+			tServ = new TheaterServiceImpl();
+		return tServ;
+	}
 
 	@Override
 	public List<Theater> findAll() {
