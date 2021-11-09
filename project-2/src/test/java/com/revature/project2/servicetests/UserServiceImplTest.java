@@ -45,10 +45,10 @@ public class UserServiceImplTest {
 	@Test
 	@Order(1)
 	public void findAllTest() {
-		List<User> list = new ArrayList<User>();
-		User one = new User("john","john@gmail.com", "password");
-		User two = new User("susan","susan@gmail.com","test");
-		User three = new User("don","don@gmail.com", "num123");
+		List<User> list = new ArrayList<User>();			
+		User one = new User("johnnytsunami","john@gmail.com", "password");
+		User two = new User("susiecakes","susan@gmail.com","test");
+		User three = new User("thedon","don@gmail.com", "num123");
 		
 		list.add(one);
 		list.add(two);
@@ -61,33 +61,17 @@ public class UserServiceImplTest {
 	}
 	
 
-	@Test
-	@Order(2)
-	public void findByEmailTest() {
-		User temp = new User("susan","susan@gmail.com","test");
-		when(repo.findByEmail("susan@gmail.com").get(0)).thenReturn(temp);
-		
-		User test = service.findByEmail("susan@gmail.com").get(0);
-		
-		Assertions.assertEquals("test", test.getPassword());
-		Assertions.assertEquals(2, test.getId());
-		
-		
-//		Test with code below:: java.lang.NullPointerException
-		
-//		List<User> list = new ArrayList<User>();
-//		User one = new User(1,"john@gmail.com", "password");
-//		User two = new User(2,"susan@gmail.com","test");
-//		User three = new User(3,"don@gmail.com", "num123");
+//	@Test
+//	@Order(2)
+//	public void findByEmailTest() {
+//		User temp = new User("susiecakes","susan@gmail.com","test");
+//		when(repo.findByEmail("susan@gmail.com")).thenReturn(temp);
 //		
-//		list.add(one);
-//		list.add(two);
-//		list.add(three);
+//		User test = service.findByEmail("susan@gmail.com");
 //		
-//		Mockito.when(repo.findAll()).thenReturn(list);
-//		User result = service.findByEmail("susan@gmail.com");
-//		Assertions.assertEquals("susan@gmail.com", result.getEmail());
-	}
+//		Assertions.assertEquals("test", test.getPassword());
+//		Assertions.assertEquals(2, test.getId());
+//	}
 	
 	
 	@Test
@@ -102,7 +86,7 @@ public class UserServiceImplTest {
 	@Test
 	@Order(4)
 	public void findByIdTest() {
-		Optional<User> temp = Optional.ofNullable(new User("don","don@gmail.com", "num123"));
+		Optional<User> temp = Optional.ofNullable(new User("thedon","don@gmail.com", "num123"));
 		when(repo.findById(3)).thenReturn(temp);
 		
 		User test = service.findById(3);
@@ -110,21 +94,6 @@ public class UserServiceImplTest {
 		Assertions.assertEquals("don@gmail.com", test.getEmail());
 		Assertions.assertEquals("num123", test.getPassword());
 		
-//		Test with code below:: java.utilNoSuchElementException: No value present
-		
-//		List<User> list = new ArrayList<User>();
-//		User one = new User(1,"john@gmail.com", "password");
-//		User two = new User(2,"susan@gmail.com","test");
-//		User three = new User(3,"don@gmail.com", "num123");
-//		
-//		list.add(one);
-//		list.add(two);
-//		list.add(three);
-//		
-//		Mockito.when(repo.findAll()).thenReturn(list);
-//		User result = service.findById(3);
-//		System.out.println(result);
-//		Assertions.assertEquals(3, result.getUserId());
 	}
 	
 	@Test
@@ -145,3 +114,4 @@ public class UserServiceImplTest {
 		Mockito.verify(repo,times(1)).delete(test);
 	}
 }
+

@@ -8,11 +8,13 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "showings")
 @Data
 @AllArgsConstructor // added for testing
+@NoArgsConstructor // added for testing
 public class Showing {
 
 	@Id
