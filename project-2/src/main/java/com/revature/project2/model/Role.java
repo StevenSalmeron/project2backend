@@ -11,10 +11,12 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "roles")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor // added for testing
 public class Role {
 	@Id
