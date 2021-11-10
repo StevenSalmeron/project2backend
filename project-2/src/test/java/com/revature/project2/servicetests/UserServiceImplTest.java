@@ -1,6 +1,5 @@
 package com.revature.project2.servicetests;
 
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
@@ -45,33 +44,38 @@ public class UserServiceImplTest {
 	@Test
 	@Order(1)
 	public void findAllTest() {
-		List<User> list = new ArrayList<User>();			
+		List<User> list = new ArrayList<User>();								
 		User one = new User("johnnytsunami","john@gmail.com", "password");
 		User two = new User("susiecakes","susan@gmail.com","test");
 		User three = new User("thedon","don@gmail.com", "num123");
 		
-		list.add(one);
-		list.add(two);
+		list.add(one);															
+		list.add(two);	
 		list.add(three);
 		
-		Mockito.when(repo.findAll()).thenReturn(list);
-		List<User> result = service.findAll();
+		Mockito.when(repo.findAll()).thenReturn(list);						
+		List<User> result = service.findAll();								
 		
-		Assertions.assertNotEquals(0, result.size());
+		Assertions.assertNotEquals(0, result.size());						//verify result list is not empty
 	}
 	
 
-//	@Test
-//	@Order(2)
-//	public void findByEmailTest() {
-//		User temp = new User("susiecakes","susan@gmail.com","test");
-//		when(repo.findByEmail("susan@gmail.com")).thenReturn(temp);
-//		
-//		User test = service.findByEmail("susan@gmail.com");
-//		
-//		Assertions.assertEquals("test", test.getPassword());
-//		Assertions.assertEquals(2, test.getId());
-//	}
+	@Test
+	@Order(2)
+	public void findByEmailTest() {
+		
+		List<User> list = new ArrayList<User>();						// Create a list
+		User temp = new User("susiecakes","susan@gmail.com","test");	//Add new user to list	
+		list.add(temp);
+		
+		when(repo.findByEmail("susan@gmail.com")).thenReturn(list);		//when repository object finds email, return list of values
+		List<User> test = service.findByEmail("susan@gmail.com");		//create a test list and set equal to the values returned by findByEmail method
+		User target = test.get(0);										//create a user and set it equal to first value in the list
+		
+		Assertions.assertEquals("susiecakes", target.getUsername());	//verify username matches
+		Assertions.assertEquals("test", target.getPassword());			//verify password matches
+		
+	}
 	
 	
 	@Test
@@ -110,7 +114,7 @@ public class UserServiceImplTest {
 	@Order(6)
 	public void delete() {
 		User test = new User("test","test@gmail.com","password");
-		service.delete(0);
+		service.delete(1);
 		Mockito.verify(repo,times(1)).delete(test);
 	}
 }
