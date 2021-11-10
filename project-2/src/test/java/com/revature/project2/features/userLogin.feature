@@ -23,8 +23,8 @@ Feature: Login Action
 Scenario: 'Standard login with valid credentials'
 Given the user is on the login page
 And the user is registered
-When the user enters "username" and "password"
-And "username" and "password" are valid
+When the user enters "email" and "password"
+And "email" and "password" are valid
 Then the user should be logged in
 And viewing the homepage
 
