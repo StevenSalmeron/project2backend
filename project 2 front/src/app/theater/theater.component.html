@@ -1,0 +1,34 @@
+<div class="col-md-12">
+    <div class="card card-container">
+        <h1>Booking Form</h1>
+        <form>    
+            <label for="theater">Available Theaters</label>
+            <select class="form-control" name="my-select" [(ngModel)]="mySelect" (change)="selectChange()">
+                <option 
+                    [value]="theater.theaterId"
+                    *ngFor="let theater of theaters">
+                Theater {{theater.theaterId}}
+                </option>
+            </select>
+        </form>
+        <label for="theater">Selected Theater: {{selectedValue.theaterId}}</label>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Movie</th>
+                <th>Seats Available</th>
+                <th>Purchase</th>
+            </tr>
+            <tr *ngFor="let showing of showings">
+                <th>{{showing.time}}</th>
+                <th>{{selectedValue.movie}}</th>
+                <th>{{showing.currentCapacity}} / {{selectedValue.maxCapacity}}</th>
+                <th><button 
+                    type="button" 
+                    class="btn btn-primary btn-block" 
+                    *ngIf="selectedValue.maxCapacity == showing.currentCapacity"
+                    >Select Showing</button></th>
+            </tr>
+        </table>
+    </div>
+</div>
