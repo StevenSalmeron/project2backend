@@ -43,13 +43,9 @@ public class TicketServiceImplTest {
 	
 	public void findAllTest() {
 		List<Ticket> list = new ArrayList<Ticket>();
-		Ticket one = new Ticket(1, 15, 3);
-		Ticket two = new Ticket(2, 11, 2);
-		Ticket three = new Ticket(3, 12, 4);
-		
-		list.add(one);
-		list.add(two);
-		list.add(three);
+		list.add(new Ticket(1, 15, 3));
+		list.add(new Ticket(2, 11, 2));
+		list.add(new Ticket(3, 12, 4));
 		
 		Mockito.when(tRepo.findAll()).thenReturn(list);
 		List<Ticket> result = tService.findAll();

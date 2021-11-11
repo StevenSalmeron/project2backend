@@ -44,14 +44,10 @@ public class UserServiceImplTest {
 	@Test
 	@Order(1)
 	public void findAllTest() {
-		List<User> list = new ArrayList<User>();								
-		User one = new User("johnnytsunami","john@gmail.com", "password");
-		User two = new User("susiecakes","susan@gmail.com","test");
-		User three = new User("thedon","don@gmail.com", "num123");
-		
-		list.add(one);															
-		list.add(two);	
-		list.add(three);
+		List<User> list = new ArrayList<>();
+		list.add(new User("johnnytsunami","john@gmail.com", "password"));
+		list.add(new User("susiecakes","susan@gmail.com","test"));
+		list.add(new User("thedon","don@gmail.com", "num123"));
 		
 		Mockito.when(repo.findAll()).thenReturn(list);						
 		List<User> result = service.findAll();								
@@ -64,9 +60,8 @@ public class UserServiceImplTest {
 	@Order(2)
 	public void findByEmailTest() {
 		
-		List<User> list = new ArrayList<User>();						// Create a list
-		User temp = new User("susiecakes","susan@gmail.com","test");	//Add new user to list	
-		list.add(temp);
+		List<User> list = new ArrayList<User>();					//create a list
+		list.add(new User("susiecakes","susan@gmail.com","test"));	//add new user to list
 		
 		when(repo.findByEmail("susan@gmail.com")).thenReturn(list);		//when repository object finds email, return list of values
 		List<User> test = service.findByEmail("susan@gmail.com");		//create a test list and set equal to the values returned by findByEmail method
