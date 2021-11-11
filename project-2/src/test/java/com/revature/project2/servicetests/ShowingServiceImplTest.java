@@ -42,13 +42,9 @@ public class ShowingServiceImplTest {
 	@Order(1)
 	public void findAllTest() {
 		List<Showing> list = new ArrayList<Showing>();
-		Showing one = new Showing(1, 1, "10:30", "45"); // Showing(showingId, theaterId, time, currentCapacity)
-		Showing two = new Showing(1, 2, "12:30", "45");
-		Showing three = new Showing(1, 3, "1:30", "45");
-		
-		list.add(one);
-		list.add(two);
-		list.add(three);
+		list.add(new Showing(1, 1, "10:30", "45")); // Showing(showingId, theaterId, time, currentCapacity)
+		list.add(new Showing(1, 2, "12:30", "45"));
+		list.add(new Showing(1, 3, "1:30", "45"));
 		
 		Mockito.when(showRepo.findAll()).thenReturn(list);
 		List<Showing> result = showService.findAll();
