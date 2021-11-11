@@ -18,6 +18,7 @@ import com.revature.project2.service.ShowingService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("/api")
 public class ShowingController {
 	@Autowired
 	ShowingService showingService;
