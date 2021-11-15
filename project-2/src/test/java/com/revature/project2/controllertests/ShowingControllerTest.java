@@ -48,7 +48,7 @@ public class ShowingControllerTest {
 	@Test
 	public void findAllTest() {
 		List<Showing> list = new ArrayList<Showing>();
-		list.add(new Showing(1, 1, "10:30", "45")); // Showing(showingId, theaterId, time, currentCapacity)
+		list.add(new Showing(1, 1, "10:30", "45")); 				// Showing(showingId, theaterId, time, currentCapacity)
 		list.add(new Showing(1, 2, "12:30", "45"));
 		list.add(new Showing(1, 3, "1:30", "45"));
 		
@@ -67,13 +67,13 @@ public class ShowingControllerTest {
 		Showing temp = new Showing(1, 3, "1:30", "45");
 		list.add(temp);
 		
-		Mockito.when(showServImp.findByTheaterId(3)).thenReturn(list);
+		Mockito.when(showServImp.findByTheaterId(3)).thenReturn(list);	//mock behavior of ShowingServiceImp to return findByTheater list
 		List<Showing> test = showServImp.findByTheaterId(3);
 		Showing target = test.get(0);
 		
-		Assertions.assertEquals("1:30", target.getTime());
-		Assertions.assertEquals("45", target.getCurrentCapacity());
-		Mockito.verify(showServImp,times(1)).findByTheaterId(3);
+		Assertions.assertEquals("1:30", target.getTime());				//showing time should equal 1:30
+		Assertions.assertEquals("45", target.getCurrentCapacity());		//current theater capacity should equal 45
+		Mockito.verify(showServImp,times(1)).findByTheaterId(3);		//verify that ShowingServiceImp calls findByTheater 1 time
 		
 		String url = "/showingsByTheater/{showingId}";
 		try {
@@ -85,13 +85,13 @@ public class ShowingControllerTest {
 	
 	@Test
 	public void findByIdTest() {
-		Showing temp = new Showing(1, 1, "10:30", "45"); //showingId, theaterId, time, currentCapacity
+		Showing temp = new Showing(1, 1, "10:30", "45"); 				//showingId, theaterId, time, currentCapacity
 		Mockito.when(showServImp.findById(1)).thenReturn(temp);
 		
 		Showing test = showServImp.findById(1);
 		
-		Assertions.assertEquals("10:30", test.getTime());
-		Assertions.assertEquals("45", test.getCurrentCapacity());
+		Assertions.assertEquals("10:30", test.getTime());				//Showing returned by findById method should have a start time of 10:30
+		Assertions.assertEquals("45", test.getCurrentCapacity());		//Showing returned by findById method should have a currentCapacity of 45
 		
 		String url = "/showings/{showingId}";
 		try {
@@ -106,7 +106,7 @@ public class ShowingControllerTest {
 		Showing temp = new Showing(1, 1, "10:30", "45");
 		showServImp.save(temp);
 		
-		Mockito.verify(showServImp,times(1)).save(temp);
+		Mockito.verify(showServImp,times(1)).save(temp);				//Verify ShowingServiceImpl calls save method 1 time
 		
 		
 		String url = "/showings";
@@ -124,7 +124,7 @@ public class ShowingControllerTest {
 		temp.setTime("10:45");
 		showServImp.update(1, temp);
 		
-		Mockito.verify(showServImp,times(1)).update(1, temp);
+		Mockito.verify(showServImp,times(1)).update(1, temp);			//Verify ShowingServiceImpl calls update method 1 time
 		
 		
 		String url = "/showings/{showingId}";
@@ -139,7 +139,7 @@ public class ShowingControllerTest {
 	public void deleteTest() {
 		Showing temp = new Showing(1, 1, "10:30", "45");
 		showRepo.delete(temp);
-		Mockito.verify(showRepo,times(1)).delete(temp);
+		Mockito.verify(showRepo,times(1)).delete(temp);					//Verify ShowingServiceImpl calls delete method 1 time
 		
 		String url = "/showings/{showingId}";
 		try {

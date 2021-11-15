@@ -24,6 +24,6 @@ public class UserRepositoryIntegrationTest {
 		User temp = new User("johntsunami","john@gmail.com", "password");
 		userRepo.save(temp);
 		
-		Assert.assertNotNull(temp.getId());
+		Assert.assertNotNull(temp.getId());			//User should have a value for userId
 	}
 }

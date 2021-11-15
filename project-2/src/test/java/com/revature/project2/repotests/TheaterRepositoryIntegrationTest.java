@@ -22,6 +22,6 @@ public class TheaterRepositoryIntegrationTest {
 		Theater temp = new Theater(1,"Shrek", 45);
 		theaterRepo.save(temp);
 		
-		Assert.assertNotNull(temp.getTheaterId());
+		Assert.assertNotNull(temp.getTheaterId());			//Theater should have a value for theaterId
 	}
 }

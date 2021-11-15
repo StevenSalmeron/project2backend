@@ -23,6 +23,6 @@ public class TicketRepositoryIntegrationTest {
 		Ticket temp = new Ticket(1, 15, 3);
 		ticketRepo.save(temp);
 		
-		Assert.assertNotNull(temp.getTicketId());
+		Assert.assertNotNull(temp.getTicketId());			//Ticket should have a value for ticketId
 	}
 }

@@ -56,10 +56,8 @@ public class UserControllerTest {
 		list.add(new User("thedon","don@gmail.com", "num123"));
 		
 		
-		Mockito.when(uServImp.findAll()).thenReturn(list);
+		Mockito.when(uServImp.findAll()).thenReturn(list);			//Mock UserServiceImp to return list of all users
 		String url = "/users";
-		//TODO: add MvcResult to capture the mockMvc return value. then write assertions to verify results
-		// MvcResult mvcResult = mockMvc.perform(get(url)).andExpect(status().isOk()).andReturn();
 		try {
 			mockMvc.perform(get(url)).andExpect(status().isOk());
 		} catch (Exception e) {
@@ -72,7 +70,7 @@ public class UserControllerTest {
 		List<User> list = new ArrayList<User>();					
 		list.add(new User("susiecakes","susan@gmail.com","test"));	
 		
-		Mockito.when(uServImp.findByEmail("susan@gmail.com")).thenReturn(list);
+		Mockito.when(uServImp.findByEmail("susan@gmail.com")).thenReturn(list);		//Mock UserServiceImp to return user matching the email
 		String url = "/usersByEmail/{email}";
 		try {
 			mockMvc.perform(get(url)).andExpect(status().isOk());
@@ -85,7 +83,7 @@ public class UserControllerTest {
 	public void findByIdTest() {
 		User test = new User("thedon","don@gmail.com", "num123");
 		
-		Mockito.when(uServImp.findById(3)).thenReturn(test);
+		Mockito.when(uServImp.findById(3)).thenReturn(test);			//Mock UserServiceImp to return User matching given id
 		
 		String url = "/users/{userId}";
 		try {
@@ -101,7 +99,7 @@ public class UserControllerTest {
 		User test = new User("test","test@gmail.com","password");
 		uServImp.save(test);
 		
-		Mockito.verify(uServImp,times(1)).save(test);
+		Mockito.verify(uServImp,times(1)).save(test);				//Verify UserServiceImp calls save method 1 time
 		
 		String url = "/users";
 		try {
@@ -117,7 +115,7 @@ public class UserControllerTest {
 		test.setEmail("test@yahoo.com");
 		uServImp.update(0, test);
 		
-		Mockito.verify(uServImp,times(1)).update(0, test);
+		Mockito.verify(uServImp,times(1)).update(0, test);			//Verify UserServiceImp calls update method 1 time
 		
 		String url = "/users/{userId}";
 		try {
@@ -132,8 +130,8 @@ public class UserControllerTest {
 	public void deleteTest() {
 		User test = new User("test","test@gmail.com","password");		
 		uRepo.delete(test);
-		Mockito.verify(uRepo,times(1)).delete(test);
-		//Mockito.verify(uServImp,times(1)).delete(0);			//test fails because id is null
+		Mockito.verify(uRepo,times(1)).delete(test);					//Verify UserServiceImp calls delete method 1 time
+		//Mockito.verify(uServImp,times(1)).delete(0);					//test fails because id is null
 		
 		String url = "/users/{userId}";
 		try {
