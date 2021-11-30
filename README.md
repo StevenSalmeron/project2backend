@@ -15,7 +15,7 @@ A local movie theater web application used to book seats/tickets for showings. T
 * Typescript
 * Log4j
 
-##Features
+## Features
 List of desired features for final implementation
 * Validated user login and registration
 * User roles for access levels (logged out, user, admin, etc.)
