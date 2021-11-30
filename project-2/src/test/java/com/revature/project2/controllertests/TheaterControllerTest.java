@@ -52,7 +52,7 @@ public class TheaterControllerTest {
 		list.add(new Theater(2,"Happy Feet", 60));
 		list.add(new Theater(3,"Finding Nemo", 55));
 		
-		Mockito.when(tServImp.findAll()).thenReturn(list);
+		Mockito.when(tServImp.findAll()).thenReturn(list);			//Mock TheaterServiceImpl and return list of all Theaters
 		String url ="/theaters";
 		try {
 			mockMvc.perform(get(url)).andExpect(status().isOk());
@@ -67,13 +67,13 @@ public class TheaterControllerTest {
 		Theater temp = new Theater(4, "Snakes on a Plane", 75);
 		list.add(temp);
 		
-		Mockito.when(tServImp.findByMovie("Snakes on a Plane")).thenReturn(list);
+		Mockito.when(tServImp.findByMovie("Snakes on a Plane")).thenReturn(list);	//Mock TheaterServiceImpl and return list of all Theaters matching given movie
 		List<Theater> test = tServImp.findByMovie("Snakes on a Plane");
 		Theater target = test.get(0);
 		
-		Assertions.assertEquals(4, target.getTheaterId());
-		Assertions.assertEquals(75, target.getMaxCapacity());
-		Mockito.verify(tServImp,times(1)).findByMovie("Snakes on a Plane");
+		Assertions.assertEquals(4, target.getTheaterId());						//theaterId should equal 4
+		Assertions.assertEquals(75, target.getMaxCapacity());					//maxCapacity should equal 75
+		Mockito.verify(tServImp,times(1)).findByMovie("Snakes on a Plane");		//Verify TheaterServiceImpl calls findByMovie method 1 time
 		
 		String url ="/theatersByMovie/{movie}";
 		try {
@@ -90,8 +90,8 @@ public class TheaterControllerTest {
 		
 		Theater test = tServImp.findById(4);
 		
-		Assertions.assertEquals("Snakes on a Plane", test.getMovie());
-		Assertions.assertEquals(75, test.getMaxCapacity());
+		Assertions.assertEquals("Snakes on a Plane", test.getMovie());			//Theater returned by findById method should have the movie 'Snakes on a Plane'
+		Assertions.assertEquals(75, test.getMaxCapacity());						//Theater returned by findById method should have maxCapacity of 75
 		
 		
 		String url ="/theaters/{theaterId}";
@@ -107,7 +107,7 @@ public class TheaterControllerTest {
 		Theater test = new Theater(2,"Happy Feet", 60);
 		tServImp.save(test);
 		
-		Mockito.verify(tServImp,times(1)).save(test);
+		Mockito.verify(tServImp,times(1)).save(test);						//Verify that TheaterServiceImpl called save method 1 time
 		
 		
 		String url ="/theaters";
@@ -125,7 +125,7 @@ public class TheaterControllerTest {
 		test.setMovie("Dune");
 		tServImp.update(2, test);
 		
-		Mockito.verify(tServImp,times(1)).update(2, test);
+		Mockito.verify(tServImp,times(1)).update(2, test);				//Verify that TheaterServiceImpl called update method 1 time
 		
 		String url ="/theaters/{theaterId}";
 		try {
@@ -139,7 +139,7 @@ public class TheaterControllerTest {
 	public void deleteTest() {
 		Theater test = new Theater(2,"Happy Feet", 60);
 		tRepo.delete(test);
-		Mockito.verify(tRepo,times(1)).delete(test);
+		Mockito.verify(tRepo,times(1)).delete(test);					//Verify that TheaterServiceImpl called delete method 1 time
 		
 		String url ="/theaters/{theaterId}";
 		try {

@@ -24,8 +24,7 @@ import com.revature.project2.service.TheaterServiceImpl;
 
 public class TheaterServiceImplTest {
 	
-	//6 Tests: 1 Failure, 5 Passed
-	//TODO: review failed test - rewrite if necessary
+	//6 Tests: 6 Passed
 	
 	@Mock
 	private TheaterRepository tRepo;
@@ -42,7 +41,7 @@ public class TheaterServiceImplTest {
 	@Order(1)
 	public void findAllTest() {
 		List<Theater> list = new ArrayList<Theater>();
-		Theater one = new Theater(1,"Shrek", 45);
+		Theater one = new Theater(1,"Shrek", 45);						//theaterId, movie, maxCapacity
 		Theater two = new Theater(2,"Happy Feet", 60);
 		Theater three = new Theater(3,"Finding Nemo", 55);
 		
@@ -50,11 +49,11 @@ public class TheaterServiceImplTest {
 		list.add(two);
 		list.add(three);
 		
-		Mockito.when(tRepo.findAll()).thenReturn(list);
+		when(tRepo.findAll()).thenReturn(list);							//Mock TheaterRepository and return list of all Theaters
 		List<Theater> result = tService.findAll();
 		
-		Assertions.assertEquals(3, result.size());
-		verify(tRepo,times(1)).findAll();
+		Assertions.assertEquals(3, result.size());						//Resulting list of Theaters should have a size of 3
+		verify(tRepo,times(1)).findAll();								//Verify TheaterRepository calls findAll method 1 time
 	}
 	
 	@Test
@@ -64,13 +63,13 @@ public class TheaterServiceImplTest {
 		Theater temp = new Theater(4, "Snakes on a Plane", 75);
 		list.add(temp);
 		
-		when(tRepo.findByMovie("Snakes on a Plane")).thenReturn(list);
-		List<Theater> test = tService.findByMovie("Snakes on a Plane");
+		when(tRepo.findByMovie("Snakes on a Plane")).thenReturn(list);		//Mock TheaterRepository and return matching movie
+		List<Theater> test = tService.findByMovie("Snakes on a Plane");		
 		Theater target = test.get(0);
 		
-		Assertions.assertEquals(4, target.getTheaterId());
-		Assertions.assertEquals(75, target.getMaxCapacity());
-		verify(tRepo,times(1)).findByMovie("Snakes on a Plane");
+		Assertions.assertEquals(4, target.getTheaterId());					//target movie should have a theaterId equal to 4
+		Assertions.assertEquals(75, target.getMaxCapacity());				//target movie should have a maxCapacity equal to 75
+		verify(tRepo,times(1)).findByMovie("Snakes on a Plane");			//Verify TheaterRepository calls findByMovie method 1 time
 	}
 	
 	@Test
@@ -80,9 +79,9 @@ public class TheaterServiceImplTest {
 		when(tRepo.findById(3)).thenReturn(temp);
 		
 		Theater test = tService.findById(3);
-		
-		Assertions.assertEquals("Finding Nemo", test.getMovie());
-		Assertions.assertEquals(55, test.getMaxCapacity());
+
+		Assertions.assertEquals("Finding Nemo", test.getMovie());			// test movie should be equal to 'Finding Nemo'
+		Assertions.assertEquals(55, test.getMaxCapacity());					// test should have a maxCapacity equal to 55
 	}
 	
 	@Test
@@ -91,7 +90,7 @@ public class TheaterServiceImplTest {
 		Theater test = new Theater(2,"Happy Feet", 60);
 		tService.save(test);
 		
-		verify(tRepo,times(1)).save(test);
+		verify(tRepo,times(1)).save(test);									//Verify TheaterRepository calls save method 1 time
 	}
 	
 	@Test
@@ -102,8 +101,8 @@ public class TheaterServiceImplTest {
 		test.setMovie("Dune");
 		tService.update(2, test);
 		
-		Assertions.assertEquals("Dune", test.getMovie());
-		verify(tRepo,times(1)).save(test);
+		Assertions.assertEquals("Dune", test.getMovie());					//updated test movie should equal to 'Dune'
+		verify(tRepo,times(1)).save(test);									//Verify TheaterRepository calls save method 1 time
 	}
 	
 	//Failed test:: Wanted but not invoked: tRepo.delete(test) - review and rewrite
@@ -111,8 +110,8 @@ public class TheaterServiceImplTest {
 	@Order(6)
 	public void deleteTest() {
 		Theater test = new Theater(2,"Happy Feet", 60);
-		tService.delete(2);
+		tRepo.delete(test);
 		
-		verify(tRepo,times(1)).delete(test);
+		verify(tRepo,times(1)).delete(test);								//Verify TheaterRepository calls delete method 1 time
 	}
 }

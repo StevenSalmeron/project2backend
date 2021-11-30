@@ -22,6 +22,6 @@ public class ShowingRepositoryIntegrationTest {
 		Showing temp = new Showing(1, 2, "12:30", "45");
 		showRepo.save(temp);
 		
-		Assert.assertNotNull(temp.getShowingId());
+		Assert.assertNotNull(temp.getShowingId());			//Showing should have a value for showingId
 	}
 }
