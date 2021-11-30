@@ -1,4 +1,4 @@
-# Project2 - Moving Booking - Backend & Frontend + Testing
+# Project2 - Movie Booking - Backend & Frontend + Testing
 ## Project Description 
 A local movie theater web application used to book seats/tickets for showings. The users will be able to create a login account that allows them to check listings and book tickets. Show listings will be grouped by theater in tables that show the movie title, time, and available seats. Users will also have a profile page where they can track their credentials and tickets.
 
